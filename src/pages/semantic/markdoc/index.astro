@@ -1,0 +1,21 @@
+---
+import fs from "node:fs/promises";
+import Markdoc from "@markdoc/markdoc";
+import config from "../../../content/config";
+import MarkdocReactRenderer from "../../../components/markdoc-react-renderer";
+const filePath = new URL("../../../content/semantic-nodes.mdoc", import.meta.url);
+const rawText = await fs.readFile(filePath, "utf-8");
+
+/* 1. PARSE raw text and convert to AST */
+const ast = Markdoc.parse(rawText);
+/* 2. TRANSFORM AST using the config into Renderable Tree */
+const content = Markdoc.transform(ast, config);
+
+---
+
+<html>
+  <body>
+    <!-- 3. RENDER Renderable Tree using a Markdoc Renderer -->
+    <MarkdocReactRenderer content={content} />
+  </body>
+</html>
