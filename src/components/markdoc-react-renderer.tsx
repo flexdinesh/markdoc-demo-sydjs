@@ -11,7 +11,5 @@ export default function MarkdocReactRenderer({ content }: { content: any }) {
     YouTubeEmbed,
   };
 
-  // return Markdoc.renderers.react(content, React, { });
-
   return Markdoc.renderers.react(content, React, { components });
 }
